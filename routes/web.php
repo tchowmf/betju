@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 
 Route::get('/', function () {
-    return view('teste.teste');
+    return view('templates.teste');
 });
 
 Route::get('/dashboard', function () {
