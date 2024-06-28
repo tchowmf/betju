@@ -17,9 +17,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'user',
         'password',
+        'credits'
     ];
 
     /**
@@ -40,8 +40,13 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    //releation bet models
+    public function bets()
+    {
+        return $this->hasMany(Bet::class);
     }
 }
