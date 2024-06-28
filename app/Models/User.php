@@ -17,9 +17,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'user',
+        'username',
         'password',
-        'credits'
+        'credits',
+        'role_id',
     ];
 
     /**
@@ -44,9 +45,16 @@ class User extends Authenticatable
         ];
     }
 
-    //releation bet models
+    //releation role model
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    //releation bet model
     public function bets()
     {
         return $this->hasMany(Bet::class);
     }
+    
 }
