@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login - Bet Juuuuu</title>
+    <title>Login - Bet Juuu - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -37,7 +37,7 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Bem-Vindo ao Bet Juuuuu!</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Bem-Vindo ao Bet Juuu!</h1>
                         </div>
                         <form method="POST" action="{{ route('login') }}">
                             @CSRF

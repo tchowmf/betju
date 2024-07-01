@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@yield('title', 'Bet Juuuuu')</title>
+    <title>@yield('title', 'Bet Juuu')</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -33,7 +33,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Bet Juuuuu</div>
+                <div class="sidebar-brand-text mx-3">Bet Juuu</div>
             </a>
 
             <!-- Divider -->

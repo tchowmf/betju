@@ -1,5 +1,5 @@
 @extends('templates.blank')
-@section('title', "Bet Juuuuu - Criar Aposta")
+@section('title', "Bet Juuu - Criar Aposta")
 
 @section('contents')
 <div class="col-xl-3 col-md-6 mb-4">

@@ -1,5 +1,5 @@
 @extends('templates.blank')
-@section('title', "Bet Juuuuu - Aposta")
+@section('title', "Bet Juuu - Apostas Cadastradas")
 
 @section('contents')
 

@@ -1,5 +1,5 @@
 @extends('templates.blank')
-@section('title', "Bet Juuuuu - Apostas Abertas")
+@section('title', "Bet Juuu - Apostas Abertas")
 
 @section('contents')
 <!-- Page Heading -->
