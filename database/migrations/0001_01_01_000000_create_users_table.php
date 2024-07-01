@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('password');
-            $table->decimal('credits', 10, 2);
-            $table->foreignId('role_id')->nullablle()->contrained('roles');
+            $table->decimal('credits', 10, 2)->nullable();
+            $table->foreignId('role_id')->default(2)->contrained('roles');
             $table->rememberToken();
             $table->timestamps();
         });

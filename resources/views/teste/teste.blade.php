@@ -1,8 +1,6 @@
 @extends('templates.blank')
-@section('title', "betju - apostas")
+@section('title', "Bet Juuuuu - Criar Aposta")
 
 @section('contents')
-
-
 
 @endsection

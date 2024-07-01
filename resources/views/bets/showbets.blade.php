@@ -1,11 +1,19 @@
 @extends('templates.blank')
-@section('title', "Bet Juuuuu - Apostas")
+@section('title', "Bet Juuuuu - Apostas Abertas")
 
 @section('contents')
 <!-- Page Heading -->
 <div class="d-flex justify-content-between mb-3">
     <h2 class="h3 mb-0 text-gray-800">APOSTAS ABERTAS</h2>
 </div>
+
+@if(!empty($success))
+  <div class="alert alert-danger sm-2"> {{ $success }}</div>
+@endif
+
+@if(!empty($error))
+  <div class="alert alert-danger sm-2"> {{ $error }}</div>
+@endif
 
 <div id="content" class="d-flex flex-wrap">
     <div class="col-lg-2">
@@ -29,7 +37,9 @@
                             </div>
                         </div>
                     </div>
-                    <br>x<br><br>
+                    <br>
+                    <div class="text-center">x</div>
+                    <br>
                     <div class="row no-gutters align-items-center">
                         <div class="col-auto" style="width: 100px;">
                             <div class="mb-0 mr-3 font-weight-bold text-gray-800">Caio</div>
@@ -68,7 +78,9 @@
                             </div>
                         </div>
                     </div>
-                    <br>x<br><br>
+                    <br>
+                    <div class="text-center">x</div>
+                    <br>
                     <div class="row no-gutters align-items-center">
                         <div class="col-auto" style="width: 100px;">
                             <div class="mb-0 mr-3 font-weight-bold text-gray-800">Pedro</div>
