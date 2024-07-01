@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Bet;
+use App\Models\Event;
 
 class BetController extends Controller
 {
+
+    public function index()
+    {
+        $events = Event::all();
+        return view('bets.showbets', compact('events'));
+    }
+
     public function store(Request $request)
     {
         $user = auth()->user();

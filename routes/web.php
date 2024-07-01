@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BetController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
@@ -11,7 +12,7 @@ Route::get('/aaa', function () {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
-    Route::get('/', [HomeController::class, 'index'])->name('events.create');
+    Route::get('/apostas', [BetController::class, 'index'])->name('bet.index');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
