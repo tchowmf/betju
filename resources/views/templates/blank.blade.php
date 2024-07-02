@@ -67,14 +67,14 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('withdraw.index') }}">
                     <i class="fas fa-fw fa-money-bill"></i>
                     <span>Sacar</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('deposit.index') }}">
                     <i class="fas fa-fw fa-qrcode"></i>
                     <span>Depositar</span></a>
             </li>

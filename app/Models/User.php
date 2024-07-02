@@ -56,5 +56,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bet::class);
     }
+
+    //releation bet model
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
     
 }
