@@ -69,7 +69,7 @@
 
 @section('scripts')
 <script>
-    @foreach ($events as $event)
+    @foreach ($events->where('status', 'ativo') as $event)
     (function() {
         const countdownElement = document.getElementById('countdown{{$event->id}}');
         const eventTime = new Date("{{ \Carbon\Carbon::parse($event->time_limit)->setTimezone('America/Sao_Paulo')->format('Y-m-d\TH:i:s') }}-03:00").getTime();
