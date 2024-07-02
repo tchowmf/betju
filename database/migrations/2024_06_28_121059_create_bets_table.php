@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('bets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('event_id')->constrained('events');
             $table->enum('bet_type', ['winner', 'games']);
-            $table->integer('bet_value');
+            $table->string('bet_value');
             $table->decimal('bet_amount', 10, 2)->default(15.00);
             $table->timestamps();
         });

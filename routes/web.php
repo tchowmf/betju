@@ -7,12 +7,14 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 
-Route::get('/aaa', function () {
-    return view('bets.showbets');
+Route::get('/aaaaaaa', function () {
+    return view('bets.inspectbet');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/apostas', [BetController::class, 'index'])->name('bet.index');
+    Route::get('/apostas/{id}', [BetController::class, 'inspect'])->name('bet.inspect');
+    Route::post('/apostas', [BetController::class, 'store'])->name('bet.store');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function() {

@@ -17,11 +17,12 @@ class EventController extends Controller
         if($userrole == 'admin')
         {
             $events = Event::all();
-            return view('bets.events', compact('events'));
+            return view('events.events', compact('events'));
         }
         else
         {
-            return view('bets.showbets')->with('error', 'Não tem autorização');
+            $events = Event::all();
+            return view('bets.showbets', compact('events'))->with('error', 'Não tem autorização');
         }
     }
 
@@ -31,11 +32,12 @@ class EventController extends Controller
         
         if($userrole == 'admin')
         {
-            return view('bets.createbet');
+            return view('events.createevent');
         }
         else
         {
-            return view('bets.showbets')->with('error', 'Não tem autorização');
+            $events = Event::all();
+            return view('bets.showbets', compact('events'))->with('error', 'Não tem autorização');
         } 
     }
 
@@ -58,7 +60,7 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        return view('bets.editbet', compact('event'));
+        return view('events.editevent', compact('event'));
     }
 
     public function update(Request $request, Event $event)

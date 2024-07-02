@@ -7,12 +7,12 @@
     <h2 class="h3 mb-0 text-gray-800">APOSTAS ABERTAS</h2>
 </div>
 
-@if(!empty($success))
-  <div class="alert alert-danger sm-2"> {{ $success }}</div>
+@if(session('success'))
+  <div class="alert alert-success sm-2">{{ session('success') }}</div>
 @endif
 
-@if(!empty($error))
-  <div class="alert alert-danger sm-2"> {{ $error }}</div>
+@if(session('error'))
+  <div class="alert alert-danger sm-2">{{ session('error') }}</div>
 @endif
 
 <div id="content" class="d-flex flex-wrap">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <br><a href="#" class="btn btn-info btn-sm">
+                    <br><a href="{{ route('bet.inspect', $event->id) }}" class="btn btn-info btn-sm">
                         <span class="text">Ver Aposta</span>
                     </a>
                 </div>
@@ -60,7 +60,5 @@
     </div>
     @endforeach
 </div>
-
-
 
 @endsection

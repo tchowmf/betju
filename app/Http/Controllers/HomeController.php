@@ -15,12 +15,12 @@ class HomeController extends Controller
             
             if($userrole == 'admin')
             {
-                return view('bets.createbet');
+                return view('events.createevent');
             }
 
             if($userrole == 'gambler')
             {
-                return view('bets.showbets');
+                return view('events.showbets');
             }
 
             else
