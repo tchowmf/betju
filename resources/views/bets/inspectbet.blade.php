@@ -93,7 +93,7 @@
 <script>
     (function() {
         const countdownElement = document.getElementById('countdown{{$bet->id}}');
-        const eventTime = new Date("{{ \Carbon\Carbon::parse($bet->time_limit)->setTimezone('America/Sao_Paulo')->format('Y-m-d\TH:i:s\Z') }}-03:00").getTime();
+        const eventTime = new Date("{{ \Carbon\Carbon::parse($bet->time_limit)->setTimezone('America/Sao_Paulo')->format('Y-m-d\TH:i:s') }}-03:00").getTime();
         
         function updateCountdown() {
             const now = new Date().getTime();
