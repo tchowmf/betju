@@ -31,20 +31,26 @@ class BetController extends Controller
             'bet_value' => 'required',
             'bet_amount' => 'required|numeric|min:15|max:30',
         ]);
-
+    
+        $event = Event::find($request->event_id);
+    
+        if ($event->status !== 'ativo' || now() > $event->time_limit) {
+            return redirect()->route('bet.index')->with('error', 'Não é possível realizar a aposta. Evento inativo ou fora do tempo permitido.');
+        }
+    
         $user = auth()->user();
         $betAmount = $request->bet_amount;
-
+    
         // Verificar se o usuário tem créditos suficientes
         if ($user->credits < $betAmount) {
             return redirect()->route('bet.index')->with('error', 'Créditos insuficientes para realizar a aposta.');
         }
-        
+    
         // Descontar os créditos
         $user->credits -= $betAmount;
         /** @var \App\Models\User $user **/
         $user->save();
-
+    
         // Registrar a aposta
         $bet = new Bet();
         $bet->user_id = $user->id;
@@ -53,8 +59,9 @@ class BetController extends Controller
         $bet->bet_value = $request->bet_value;
         $bet->bet_amount = $betAmount;
         $bet->save();
-
+    
         return redirect()->route('bet.index')->with('success', 'Aposta realizada com sucesso!');
     }
+    
 
 }

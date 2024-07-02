@@ -3,24 +3,27 @@
 
 @section('contents')
 
-@if(!empty($success))
-  <div class="alert alert-danger sm-2"> {{ $success }}</div>
-@endif
-
-@if(!empty($error))
-  <div class="alert alert-danger sm-2"> {{ $error }}</div>
-@endif
-
 <div class="container">
+    
+    @if(session('success'))
+    <div class="alert alert-success sm-2">{{ session('success') }}</div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger sm-2">{{ session('error') }}</div>
+    @endif
+
     <h1>Eventos de Aposta</h1>
     <a href="{{ route('events.create') }}" class="btn btn-primary mb-3">Criar Nova Aposta</a>
-    <table class="table">
+    <table class="table table-responsive-lg">
         <thead>
             <tr>
                 <th>Título</th>
                 <th>Jogador 1</th>
                 <th>Jogador 2</th>
+                <th>Status</th>
                 <th>Criado em</th>
+                <th>Válida até</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -30,7 +33,9 @@
                 <td>{{ $event->title }}</td>
                 <td>{{ $event->player1 }}</td>
                 <td>{{ $event->player2 }}</td>
+                <td>{{ $event->status }}</td>
                 <td>{{ $event->created_at->format('d/m/Y H:i') }}</td>
+                <td>{{ \Carbon\Carbon::parse($event->time_limit)->format('d/m/Y H:i') }}</td>
                 <td>
                     <a href="{{ route('events.edit', $event->id) }}" class="btn btn-success">
                         <i class="fa fa-edit"></i>

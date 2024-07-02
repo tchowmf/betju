@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('player1');
             $table->string('player2');
             $table->integer('loser_games')->nullable();
+            $table->enum('status', ['ativo', 'inativo', 'resolvido']);
+            $table->timestamp('time_limit')->nullable();
             $table->timestamps();
         });
     }

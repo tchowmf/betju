@@ -14,6 +14,8 @@ class Event extends Model
         'player1',
         'player2',
         'loser_games',
+        'status',
+        'time_limit'
     ];
 
     public function bets()

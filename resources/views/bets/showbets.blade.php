@@ -17,6 +17,7 @@
 
 <div id="content" class="d-flex flex-wrap">
     @foreach ($events as $event)
+    @if($event->status == 'ativo')
     <div class="col-lg-2">
         <!-- Collapsable Card Example -->
         <div class="card shadow mb-4">
@@ -25,7 +26,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">{{$event->title}}</h6>
             </a>
             <!-- Card Content - Collapse -->
-            <div class="collapse show" id="collapseCard{{$event->id}}" style="">
+            <div class="collapse show" id="collapseCard{{$event->id}}">
                 <div class="card-body">
                     Vencedor do jogo<br><br>
                     <div class="row no-gutters align-items-center">
@@ -51,6 +52,8 @@
                             </div>
                         </div>
                     </div>
+                    <br>
+                    <p>Tempo restante: <span id="countdown{{$event->id}}"></span></p>
                     <br><a href="{{ route('bet.inspect', $event->id) }}" class="btn btn-info btn-sm">
                         <span class="text">Ver Aposta</span>
                     </a>
@@ -58,7 +61,39 @@
             </div>
         </div>
     </div>
+    @endif
     @endforeach
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    @foreach ($events as $event)
+    (function() {
+        const countdownElement = document.getElementById('countdown{{$event->id}}');
+        const eventTime = new Date("{{ \Carbon\Carbon::parse($event->time_limit)->setTimezone('America/Sao_Paulo')->format('Y-m-d\TH:i:s') }}-03:00").getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = eventTime - now;
+
+            if (distance < 0) {
+                countdownElement.innerHTML = "Apostas encerradas";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    })();
+    @endforeach
+</script>
 @endsection

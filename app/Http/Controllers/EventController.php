@@ -47,12 +47,16 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'player1' => 'required|string|max:255',
             'player2' => 'required|string|max:255',
+            'status' => 'required|in:ativo,inativo,resolvido',
+            'time_limit' => 'required|date',
         ]);
 
         Event::create([
             'title' => $request->title,
             'player1' => $request->player1,
             'player2' => $request->player2,
+            'status' => $request->status,
+            'time_limit' => $request->time_limit,
         ]);
 
         return redirect()->route('events.index')->with('success', 'Evento criado com sucesso!');
@@ -69,12 +73,16 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'player1' => 'required|string|max:255',
             'player2' => 'required|string|max:255',
+            'status' => 'required|in:ativo,inativo,resolvido',
+            'time_limit' => 'required|date',
         ]);
 
         $event->update([
             'title' => $request->title,
             'player1' => $request->player1,
             'player2' => $request->player2,
+            'status' => $request->status,
+            'time_limit' => $request->time_limit,
         ]);
 
         return redirect()->route('events.index')->with('success', 'Evento atualizado com sucesso!');

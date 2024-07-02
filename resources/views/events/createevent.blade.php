@@ -22,7 +22,20 @@
                             <label for="player2">Jogador 2:</label>
                             <input type="text" name="player2" id="player2" class="form-control" required>
                         </div>
-                        <button type="submit" class="btn btn-primary">Criar Aposta</button>
+                        <div class="form-group">
+                            <label for="status">Status:</label>
+                            <select name="status" id="status" class="form-control">
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                                <option value="resolvido">Resolvido</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bet_end_time">Limite de Tempo para Aposta:</label>
+                            <input type="datetime-local" name="time_limit" id="time_limit" class="form-control" required>
+                        </div>
+                        <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
+                        <button type="submit" class="btn btn-primary">Criar Evento</button>
                     </form>
                 </div>
             </div>
