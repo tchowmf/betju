@@ -35,10 +35,10 @@
                             <div class="mb-0 mr-3 font-weight-bold text-gray-800">{{ $event->player1 }}</div>
                         </div>
                         <div class="col">
+                            {{ $event->player1Total }} 
                             <div class="progress progress-sm mr-2">
                                 <div class="progress-bar bg-info" role="progressbar" style="width: {{ $event->player1Percentage }}%" 
                                     aria-valuenow="{{ $event->player1Percentage }}" aria-valuemin="0" aria-valuemax="100">
-                                    {{ $event->player1Total }} 
                                 </div>
                             </div>
                         </div>
@@ -51,10 +51,10 @@
                             <div class="mb-0 mr-3 font-weight-bold text-gray-800">{{ $event->player2 }}</div>
                         </div>
                         <div class="col">
+                            {{ $event->player2Total }} 
                             <div class="progress progress-sm mr-2">
                                 <div class="progress-bar bg-info" role="progressbar" style="width: {{ $event->player2Percentage }}%" 
                                     aria-valuenow="{{ $event->player2Percentage }}" aria-valuemin="0" aria-valuemax="100">
-                                    {{ $event->player2Total }} 
                                 </div>
                             </div>
                         </div>
