@@ -101,7 +101,7 @@ class EventController extends Controller
             return;
         }
     
-        $winner = $event->winner == 'player1' ? $event->player1 : $event->player2;
+        $winner = $event->winner;
     
         $totalAmount = Bet::where('event_id', $event->id)->sum('bet_amount');
         $winningBets = Bet::where('event_id', $event->id)->where('bet_value', $winner)->get();

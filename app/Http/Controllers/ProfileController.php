@@ -16,7 +16,7 @@ class ProfileController extends Controller
     {
         return view('profile.index', [
             'user' => $request->user(),
-        ]);;
+        ]);
     }
 
     /**

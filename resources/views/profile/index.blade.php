@@ -48,7 +48,7 @@
                                         <div>
                                             JOGOS
                                         </div>
-                                        <span>{{ $user->bets->count() }}</span>
+                                        <span><strong>{{ $user->bets->count() }}</strong></span>
                                     </div>
                                 </div>
                             </div>
