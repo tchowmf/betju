@@ -12,20 +12,27 @@ class BetController extends Controller
 {
 
     public function index()
-{
-    $events = Event::where('status', 'ativo')->get();
-
-    foreach ($events as $event) {
-        $totalBets = Bet::where('event_id', $event->id)->count();
-        $player1Bets = Bet::where('event_id', $event->id)->where('bet_value', $event->player1)->count();
-        $player2Bets = Bet::where('event_id', $event->id)->where('bet_value', $event->player2)->count();
-
-        $event->player1Percentage = $totalBets > 0 ? ($player1Bets / $totalBets) * 100 : 0;
-        $event->player2Percentage = $totalBets > 0 ? ($player2Bets / $totalBets) * 100 : 0;
+    {
+        $events = Event::where('status', 'ativo')->get();
+    
+        foreach ($events as $event) {
+            $totalBets = Bet::where('event_id', $event->id)->count();
+            $player1Bets = Bet::where('event_id', $event->id)->where('bet_value', $event->player1)->count();
+            $player2Bets = Bet::where('event_id', $event->id)->where('bet_value', $event->player2)->count();
+    
+            $player1Total = Bet::where('event_id', $event->id)->where('bet_value', $event->player1)->sum('bet_amount');
+            $player2Total = Bet::where('event_id', $event->id)->where('bet_value', $event->player2)->sum('bet_amount');
+    
+            $event->player1Percentage = $totalBets > 0 ? ($player1Bets / $totalBets) * 100 : 0;
+            $event->player2Percentage = $totalBets > 0 ? ($player2Bets / $totalBets) * 100 : 0;
+    
+            $event->player1Total = $player1Total;
+            $event->player2Total = $player2Total;
+        }
+    
+        return view('bets.showbets', compact('events'));
     }
-
-    return view('bets.showbets', compact('events'));
-}
+    
 
     public function inspect($id)
     {

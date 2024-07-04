@@ -37,7 +37,9 @@
                         <div class="col">
                             <div class="progress progress-sm mr-2">
                                 <div class="progress-bar bg-info" role="progressbar" style="width: {{ $event->player1Percentage }}%" 
-                                    aria-valuenow="{{ $event->player1Percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    aria-valuenow="{{ $event->player1Percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                    {{ $event->player1Total }} 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -51,7 +53,9 @@
                         <div class="col">
                             <div class="progress progress-sm mr-2">
                                 <div class="progress-bar bg-info" role="progressbar" style="width: {{ $event->player2Percentage }}%" 
-                                    aria-valuenow="{{ $event->player2Percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    aria-valuenow="{{ $event->player2Percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                    {{ $event->player2Total }} 
+                                </div>
                             </div>
                         </div>
                     </div>

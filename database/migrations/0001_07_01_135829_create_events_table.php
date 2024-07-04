@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('loser_games')->nullable();
             $table->enum('status', ['ativo', 'inativo', 'resolvido']);
             $table->timestamp('time_limit')->nullable();
+            $table->enum('winner', ['player1', 'player2']);
             $table->timestamps();
         });
     }

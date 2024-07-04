@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bet;
 use App\Models\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\View;
@@ -93,4 +94,41 @@ class EventController extends Controller
         $event->delete();
         return redirect()->route('events.index')->with('success', 'Evento excluído com sucesso!');
     }
+
+    public function distributeWinnings(Event $event)
+    {
+        if ($event->status !== 'resolvido' || !$event->winner) {
+            return;
+        }
+    
+        $winner = $event->winner == 'player1' ? $event->player1 : $event->player2;
+    
+        $totalAmount = Bet::where('event_id', $event->id)->sum('bet_amount');
+        $winningBets = Bet::where('event_id', $event->id)->where('bet_value', $winner)->get();
+        $losingBets = Bet::where('event_id', $event->id)->where('bet_value', '!=', $winner)->sum('bet_amount');
+    
+        if ($winningBets->count() > 0) {
+            $winningAmountPerUser = $losingBets / $winningBets->count();
+    
+            foreach ($winningBets as $bet) {
+                $user = $bet->user;
+                $user->credits += $bet->bet_amount + $winningAmountPerUser;
+                $user->save();
+            }
+        }
+    }    
+
+    public function resolve(Request $request, $id)
+    {
+        $event = Event::find($id);
+        $event->status = 'resolvido';
+        $event->winner = $request->input('winner');
+        $event->save();
+    
+        $this->distributeWinnings($event);
+    
+        return redirect()->route('events.index')->with('success', 'Evento resolvido e pagamentos distribuídos.');
+    }
+
+
 }

@@ -188,6 +188,10 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Perfil
                                 </a>
+                                <a class="dropdown-item">
+                                    <i class="fas fa-money-bill fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Créditos: {{ auth()->user()->credits }}
+                                </a>
                                 <!-- SETTINGS
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>

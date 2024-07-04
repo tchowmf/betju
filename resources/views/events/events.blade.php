@@ -22,6 +22,7 @@
                 <th>Jogador 1</th>
                 <th>Jogador 2</th>
                 <th>Status</th>
+                <th>Vencedor</th>
                 <th>Criado em</th>
                 <th>Válida até</th>
                 <th>Ações</th>
@@ -34,6 +35,7 @@
                 <td>{{ $event->player1 }}</td>
                 <td>{{ $event->player2 }}</td>
                 <td>{{ $event->status }}</td>
+                <td>{{ $event->winner }}</td>
                 <td>{{ $event->created_at->format('d/m/Y H:i') }}</td>
                 <td>{{ \Carbon\Carbon::parse($event->time_limit)->format('d/m/Y H:i') }}</td>
                 <td>
