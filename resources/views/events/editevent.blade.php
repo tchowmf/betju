@@ -52,6 +52,7 @@
                         <button type="submit" class="btn btn-primary">Atualizar Aposta</button>
                     </form>
 
+                    <br>
                     <form action="{{ route('events.resolve', $event->id) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -62,7 +63,14 @@
                                 <option value="player2">{{ $event->player2 }}</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Resolver Evento</button>
+                        <button type="submit" class="btn btn-primary">Selecionar Vencedor</button>
+                    </form>
+                    
+                    <br>
+                    <form action="{{ route('events.cancel', $event->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="btn btn-danger">Cancelar Aposta</button>
                     </form>
                     
                 </div>

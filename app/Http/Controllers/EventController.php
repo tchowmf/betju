@@ -130,5 +130,28 @@ class EventController extends Controller
         return redirect()->route('events.index')->with('success', 'Evento resolvido e pagamentos distribuídos.');
     }
 
+    public function refundBets(Event $event)
+    {
+        // Obter todas as apostas relacionadas ao evento
+        $bets = Bet::where('event_id', $event->id)->get();
+
+        foreach ($bets as $bet) {
+            $user = $bet->user;
+            $user->credits += $bet->bet_amount; // Estornar o valor apostado
+            $user->save();
+        }
+    }
+
+    public function cancelEvent(Request $request, $id)
+    {
+        $event = Event::find($id);
+        $event->status = 'cancelado'; // Atualizar o status para "cancelado"
+        $event->save();
+
+        $this->refundBets($event);
+
+        return redirect()->route('events.index')->with('success', 'Evento cancelado e apostas estornadas.');
+    }
+
 
 }
