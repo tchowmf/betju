@@ -9,8 +9,15 @@ use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 
-Route::get('/aaaaaaa', function () {
-    return view('bets.inspectbet');
+Route::get('/aaa', function () {
+    return view('teste.profile');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/perfil', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/perfil/alterar-senha', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
@@ -40,11 +47,5 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 require __DIR__.'/auth.php';
