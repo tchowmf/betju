@@ -60,7 +60,7 @@ class EventController extends Controller
             'time_limit' => $request->time_limit,
         ]);
 
-        return redirect()->route('events.index')->with('success', 'Evento criado com sucesso!');
+        return redirect()->route('dashboard')->with('success', 'Evento criado com sucesso!');
     }
 
     public function edit(Event $event)
@@ -86,13 +86,13 @@ class EventController extends Controller
             'time_limit' => $request->time_limit,
         ]);
 
-        return redirect()->route('events.index')->with('success', 'Evento atualizado com sucesso!');
+        return redirect()->route('dashboard')->with('success', 'Evento atualizado com sucesso!');
     }
 
     public function destroy(Event $event)
     {
         $event->delete();
-        return redirect()->route('events.index')->with('success', 'Evento excluído com sucesso!');
+        return redirect()->route('dashboard')->with('success', 'Evento excluído com sucesso!');
     }
 
     public function distributeWinnings(Event $event)
@@ -127,7 +127,7 @@ class EventController extends Controller
     
         $this->distributeWinnings($event);
     
-        return redirect()->route('events.index')->with('success', 'Evento resolvido e pagamentos distribuídos.');
+        return redirect()->route('dashboard')->with('success', 'Evento resolvido e pagamentos distribuídos.');
     }
 
     public function refundBets(Event $event)
@@ -150,7 +150,7 @@ class EventController extends Controller
 
         $this->refundBets($event);
 
-        return redirect()->route('events.index')->with('success', 'Evento cancelado e apostas estornadas.');
+        return redirect()->route('dashboard')->with('success', 'Evento cancelado e apostas estornadas.');
     }
 
 

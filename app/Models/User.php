@@ -67,5 +67,27 @@ class User extends Authenticatable
     {
         return $this->hasMany(Transaction::class);
     }
+
+    public function wonBetsCount()
+    {
+        return $this->bets->filter(function ($bet) {
+            return $bet->event->status == 'resolvido' && $bet->bet_value == $bet->event->winner;
+        })->count();
+    }
+
+    public function netEarnings()
+    {
+        $totalBetAmount = $this->bets->sum('bet_amount');
+        $totalWinnings = 0;
+
+        foreach ($this->bets as $bet) {
+            if ($bet->event->status == 'resolvido' && $bet->bet_value == $bet->event->winner) {
+                $losingBetsAmount = Bet::where('event_id', $bet->event_id)->where('bet_value', '!=', $bet->event->winner)->sum('bet_amount');
+                $totalWinnings += $bet->bet_amount + ($losingBetsAmount / $this->bets->where('event_id', $bet->event_id)->where('bet_value', $bet->event->winner)->count());
+            }
+        }
+
+        return $totalWinnings - $totalBetAmount;
+    }
     
 }

@@ -14,9 +14,12 @@ class ProfileController extends Controller
 {
     public function index(Request $request): View
     {
-        return view('profile.index', [
-            'user' => $request->user(),
-        ]);
+        /** @var \App\Models\User $user **/
+        $user = Auth::user();
+        $wonBetsCount = $user->wonBetsCount();
+        $netEarnings = $user->netEarnings();
+
+        return view('profile.index', compact('user', 'wonBetsCount', 'netEarnings'));
     }
 
     /**

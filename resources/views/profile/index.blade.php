@@ -62,7 +62,7 @@
                                         <div>
                                             ACERTOS
                                         </div>
-                                        <span>3</span>
+                                        <span>{{ $wonBetsCount }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -70,13 +70,13 @@
 
                         <div class="col-md-4">
                             <div class="card text-center mb-3">
-                                <div class="card-body border-left-success d-flex align-items-center">
+                                <div class="card-body d-flex align-items-center {{ $netEarnings >= 0 ? 'border-left-success' : 'border-left-danger' }}">
                                     <img src="/img/profit.svg" alt="">
                                     <div class="text-left">
                                         <div>
-                                            LUCRO/PERDA
+                                            {{ $netEarnings >= 0 ? 'LUCRO' : 'PERDA' }}
                                         </div>
-                                        <span>R$ 45,00</span>
+                                        <span>R${{ number_format($netEarnings, 2, ',', '.') }}</span>
                                     </div>
                                 </div>
                             </div>

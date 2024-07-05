@@ -9,8 +9,8 @@ use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 
-Route::get('/aaa', function () {
-    return view('teste.profile');
+Route::get('/', function () {
+    return view('auth.login');
 });
 
 Route::middleware('auth')->group(function () {
@@ -24,7 +24,6 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/depositar', [DepositController::class, 'index'])->name('deposit.index');
 });
 
-
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/sacar', [WithdrawController::class, 'index'])->name('withdraw.index');
 });
@@ -36,7 +35,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
-    Route::get('/events', [EventController::class, 'index'])->name('events.index');
+    Route::get('/events', [EventController::class, 'index'])->name('dashboard');
     Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
     Route::post('/events/create', [EventController::class, 'store'])->name('events.store');
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
@@ -45,9 +44,5 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::put('/events/{id}/cancel', [EventController::class, 'cancelEvent'])->name('events.cancel');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
