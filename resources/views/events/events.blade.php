@@ -36,8 +36,8 @@
                 <td>{{ $event->player2 }}</td>
                 <td>{{ $event->status }}</td>
                 <td>{{ $event->winner }}</td>
-                <td>{{ $event->created_at->format('d/m/Y H:i') }}</td>
-                <td>{{ \Carbon\Carbon::parse($event->time_limit)->format('d/m/Y H:i') }}</td>
+                <td>{{ $event->created_at ? $event->created_at->format('d/m/Y H:i') : 'Data não informada' }}</td>
+                <td>{{ $event->time_limit ? \Carbon\Carbon::parse($event->time_limit)->format('d/m/Y H:i') : 'Data não informada' }}</td>
                 <td>
                     <a href="{{ route('events.edit', $event->id) }}" class="btn btn-success">
                         <i class="fa fa-edit"></i>
