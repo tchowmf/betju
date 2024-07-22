@@ -47,7 +47,7 @@
                         </div>
 
                         <div>
-                            <p>Créditos disponíveis: {{ auth()->user()->credits }}</p>
+                            <p>JuuuCoins disponíveis: {{ auth()->user()->credits }}</p>
                         </div>
                         <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
                         <button type="submit" class="btn btn-primary">Fazer Aposta</button>

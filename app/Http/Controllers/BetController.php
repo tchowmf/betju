@@ -60,7 +60,7 @@ class BetController extends Controller
     
         // Verificar se o usuário tem créditos suficientes
         if ($user->credits < $betAmount) {
-            return redirect()->route('bet.index')->with('error', 'Créditos insuficientes para realizar a aposta.');
+            return redirect()->route('bet.index')->with('error', 'JuuuCoins insuficientes para realizar a aposta.');
         }
     
         // Descontar os créditos
