@@ -71,7 +71,18 @@ class User extends Authenticatable
     public function wonBetsCount()
     {
         return $this->bets->filter(function ($bet) {
-            return $bet->event->status == 'resolvido' && $bet->bet_value == $bet->event->winner;
+            if ($bet->event->status != 'resolvido') {
+                return false;
+            }
+            if ($bet->bet_type == 'winner' && $bet->bet_value == $bet->event->winner) {
+                return true;
+            }
+            if ($bet->bet_type == 'games') {
+                $loserGames = $bet->event->loser_games;
+                $interval = $this->getGamesInterval($loserGames);
+                return $bet->bet_value == $interval;
+            }
+            return false;
         })->count();
     }
 
@@ -81,13 +92,38 @@ class User extends Authenticatable
         $totalWinnings = 0;
 
         foreach ($this->bets as $bet) {
-            if ($bet->event->status == 'resolvido' && $bet->bet_value == $bet->event->winner) {
-                $losingBetsAmount = Bet::where('event_id', $bet->event_id)->where('bet_value', '!=', $bet->event->winner)->sum('bet_amount');
-                $totalWinnings += $bet->bet_amount + ($losingBetsAmount / $this->bets->where('event_id', $bet->event_id)->where('bet_value', $bet->event->winner)->count());
+            if ($bet->event->status == 'resolvido') {
+                if ($bet->bet_type == 'winner' && $bet->bet_value == $bet->event->winner) {
+                    $losingBetsAmount = Bet::where('event_id', $bet->event_id)->where('bet_value', '!=', $bet->event->winner)->sum('bet_amount');
+                    $winningBetsCount = Bet::where('event_id', $bet->event_id)->where('bet_value', $bet->event->winner)->count();
+                    $totalWinnings += $bet->bet_amount + ($losingBetsAmount / $winningBetsCount);
+                }
+                if ($bet->bet_type == 'games') {
+                    $loserGames = $bet->event->loser_games;
+                    $interval = $this->getGamesInterval($loserGames);
+                    if ($bet->bet_value == $interval) {
+                        $losingBetsAmount = Bet::where('event_id', $bet->event_id)->where('bet_value', '!=', $interval)->where('bet_type', 'games')->sum('bet_amount');
+                        $winningBetsCount = Bet::where('event_id', $bet->event_id)->where('bet_value', $interval)->where('bet_type', 'games')->count();
+                        $totalWinnings += $bet->bet_amount + ($losingBetsAmount / $winningBetsCount);
+                    }
+                }
             }
         }
 
         return $totalWinnings - $totalBetAmount;
     }
+
+    private function getGamesInterval($loserGames)
+    {
+        if ($loserGames >= 0 && $loserGames <= 4) {
+            return '0-4';
+        } elseif ($loserGames >= 5 && $loserGames <= 8) {
+            return '5-8';
+        } elseif ($loserGames >= 9 && $loserGames <= 12) {
+            return '9-12';
+        }
+        return null;
+    }
+
     
 }
