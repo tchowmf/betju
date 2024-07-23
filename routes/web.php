@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('/events/create', [EventController::class, 'store'])->name('events.store');
     Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
     Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::get('/events/resolve/{event}', [EventController::class, 'resolveGet'])->name('events.resolve');
     Route::put('/events/resolve/{event}', [EventController::class, 'resolve'])->name('events.resolve');
     Route::put('/events/{id}/cancel', [EventController::class, 'cancelEvent'])->name('events.cancel');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');

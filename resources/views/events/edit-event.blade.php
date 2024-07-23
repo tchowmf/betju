@@ -51,28 +51,6 @@
                         <a href="javascript:history.back()" class="btn btn-secondary">Voltar</a>
                         <button type="submit" class="btn btn-primary">Atualizar Aposta</button>
                     </form>
-
-                    <br>
-                    <form action="{{ route('events.resolve', $event->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="winner">Selecione o Vencedor</label>
-                            <select name="winner" id="winner" class="form-control">
-                                <option value="{{ $event->player1 }}">{{ $event->player1 }}</option>
-                                <option value="{{ $event->player2 }}">{{ $event->player2 }}</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Selecionar Vencedor</button>
-                    </form>
-                    
-                    <br>
-                    <form action="{{ route('events.cancel', $event->id) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit" class="btn btn-danger">Cancelar Aposta</button>
-                    </form>
-                    
                 </div>
             </div>
         </div>

@@ -33,7 +33,7 @@ class EventController extends Controller
         
         if($userrole == 'admin')
         {
-            return view('events.createevent');
+            return view('events.create-event');
         }
         else
         {
@@ -65,7 +65,7 @@ class EventController extends Controller
 
     public function edit(Event $event)
     {
-        return view('events.editevent', compact('event'));
+        return view('events.edit-event', compact('event'));
     }
 
     public function update(Request $request, Event $event)
@@ -118,11 +118,17 @@ class EventController extends Controller
         }
     }    
 
+    public function resolveGet(Event $event): View
+    {
+        return view('events.resolve-event', compact('event'));
+    }
+
     public function resolve(Request $request, $id)
     {
         $event = Event::find($id);
         $event->status = 'resolvido';
         $event->winner = $request->input('winner');
+        $event->loser_games = $request->input('loser_games');
         $event->save();
     
         $this->distributeWinnings($event);
