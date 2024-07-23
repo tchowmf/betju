@@ -18,7 +18,7 @@
 <div id="content" class="d-flex flex-wrap">
     @foreach ($events as $event)
     @if($event->status == 'ativo')
-    <div class="col-lg-2">
+    <div class="col-lg-3">
         <!-- Collapsable Card Example -->
         <div class="card shadow mb-4">
             <!-- Card Header - Accordion -->
@@ -29,39 +29,52 @@
             <!-- Card Content - Collapse -->
             <div class="collapse show" id="collapseCard{{ $event->id }}">
                 <div class="card-body">
-                    Vencedor do jogo<br><br>
-                    <div class="row no-gutters align-items-center">
+                    <div class="text-center mb-3">Vencedor do jogo</div>
+                    <div class="row no-gutters align-items-center mb-3">
                         <div class="col-auto" style="width: 100px;">
                             <div class="mb-0 mr-3 font-weight-bold text-gray-800">{{ $event->player1 }}</div>
                         </div>
                         <div class="col">
-                            {{ $event->player1Total }} 
+                            <div>{{ $event->player1Total }}</div>
                             <div class="progress progress-sm mr-2">
                                 <div class="progress-bar bg-info" role="progressbar" style="width: {{ $event->player1Percentage }}%" 
-                                    aria-valuenow="{{ $event->player1Percentage }}" aria-valuemin="0" aria-valuemax="100">
-                                </div>
+                                    aria-valuenow="{{ $event->player1Percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="text-center">x</div>
-                    <br>
+                    <div class="text-center mb-3">x</div>
                     <div class="row no-gutters align-items-center">
                         <div class="col-auto" style="width: 100px;">
                             <div class="mb-0 mr-3 font-weight-bold text-gray-800">{{ $event->player2 }}</div>
                         </div>
                         <div class="col">
-                            {{ $event->player2Total }} 
+                            <div>{{ $event->player2Total }}</div>
                             <div class="progress progress-sm mr-2">
                                 <div class="progress-bar bg-info" role="progressbar" style="width: {{ $event->player2Percentage }}%" 
-                                    aria-valuenow="{{ $event->player2Percentage }}" aria-valuemin="0" aria-valuemax="100">
-                                </div>
+                                    aria-valuenow="{{ $event->player2Percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
-                    <br>
+
+                    <div class="text-center my-3">Games</div>
+                    @foreach (['0-4', '5-8', '9-12'] as $interval)
+                    <div class="row no-gutters align-items-center mb-3">
+                        <div class="col-auto" style="width: 100px;">
+                            <div class="mb-0 mr-3 font-weight-bold text-gray-800">Games {{ $interval }}</div>
+                        </div>
+                        <div class="col">
+                            <div>{{ $event->gameBets[$interval] ?? 0 }}</div>
+                            <div class="progress progress-sm mr-2">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{ $event->totalGameBets > 0 ? ($event->gameBets[$interval] / $event->totalGameBets) * 100 : 0 }}%" 
+                                    aria-valuenow="{{ $event->totalGameBets > 0 ? ($event->gameBets[$interval] / $event->totalGameBets) * 100 : 0 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
                     <p>Tempo restante: <span id="countdown{{ $event->id }}"></span></p>
-                    <br><a href="{{ route('bet.inspect', $event->id) }}" class="btn btn-info btn-sm">
+                    <br>
+                    <a href="{{ route('bet.inspect', $event->id) }}" class="btn btn-info btn-sm">
                         <span class="text">Ver Aposta</span>
                     </a>
                 </div>

@@ -16,18 +16,29 @@ class BetController extends Controller
         $events = Event::where('status', 'ativo')->get();
     
         foreach ($events as $event) {
-            $totalBets = Bet::where('event_id', $event->id)->count();
-            $player1Bets = Bet::where('event_id', $event->id)->where('bet_value', $event->player1)->count();
-            $player2Bets = Bet::where('event_id', $event->id)->where('bet_value', $event->player2)->count();
+            // Apostas para vencedor
+            $totalBets = Bet::where('event_id', $event->id)->where('bet_type', 'winner')->count();
+            $player1Bets = Bet::where('event_id', $event->id)->where('bet_type', 'winner')->where('bet_value', $event->player1)->count();
+            $player2Bets = Bet::where('event_id', $event->id)->where('bet_type', 'winner')->where('bet_value', $event->player2)->count();
     
-            $player1Total = Bet::where('event_id', $event->id)->where('bet_value', $event->player1)->sum('bet_amount');
-            $player2Total = Bet::where('event_id', $event->id)->where('bet_value', $event->player2)->sum('bet_amount');
+            $player1Total = Bet::where('event_id', $event->id)->where('bet_type', 'winner')->where('bet_value', $event->player1)->sum('bet_amount');
+            $player2Total = Bet::where('event_id', $event->id)->where('bet_type', 'winner')->where('bet_value', $event->player2)->sum('bet_amount');
     
             $event->player1Percentage = $totalBets > 0 ? ($player1Bets / $totalBets) * 100 : 0;
             $event->player2Percentage = $totalBets > 0 ? ($player2Bets / $totalBets) * 100 : 0;
     
             $event->player1Total = $player1Total;
             $event->player2Total = $player2Total;
+    
+            // Apostas para games
+            $gameIntervals = [
+                '0-4' => Bet::where('event_id', $event->id)->where('bet_type', 'games')->where('bet_value', '0-4')->sum('bet_amount'),
+                '5-8' => Bet::where('event_id', $event->id)->where('bet_type', 'games')->where('bet_value', '5-8')->sum('bet_amount'),
+                '9-12' => Bet::where('event_id', $event->id)->where('bet_type', 'games')->where('bet_value', '9-12')->sum('bet_amount'),
+            ];
+    
+            $event->gameBets = $gameIntervals;
+            $event->totalGameBets = array_sum($gameIntervals);
         }
     
         return view('bets.showbets', compact('events'));
