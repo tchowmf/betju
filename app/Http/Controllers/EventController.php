@@ -100,23 +100,56 @@ class EventController extends Controller
         if ($event->status !== 'resolvido' || !$event->winner) {
             return;
         }
-    
+
         $winner = $event->winner;
-    
-        $totalAmount = Bet::where('event_id', $event->id)->sum('bet_amount');
-        $winningBets = Bet::where('event_id', $event->id)->where('bet_value', $winner)->get();
-        $losingBets = Bet::where('event_id', $event->id)->where('bet_value', '!=', $winner)->sum('bet_amount');
-    
-        if ($winningBets->count() > 0) {
-            $winningAmountPerUser = $losingBets / $winningBets->count();
-    
-            foreach ($winningBets as $bet) {
+        $gamesLoser = $event->loser_games;
+
+        // Distribuição para apostas do vencedor
+        $totalAmountWinner = Bet::where('event_id', $event->id)->where('bet_type', 'winner')->sum('bet_amount');
+        $winningBetsWinner = Bet::where('event_id', $event->id)->where('bet_type', 'winner')->where('bet_value', $winner)->get();
+        $losingBetsWinner = Bet::where('event_id', $event->id)->where('bet_type', 'winner')->where('bet_value', '!=', $winner)->sum('bet_amount');
+
+        if ($winningBetsWinner->count() > 0) {
+            $winningAmountPerUserWinner = $losingBetsWinner / $winningBetsWinner->count();
+
+            foreach ($winningBetsWinner as $bet) {
                 $user = $bet->user;
-                $user->credits += $bet->bet_amount + $winningAmountPerUser;
+                $user->credits += $bet->bet_amount + $winningAmountPerUserWinner;
                 $user->save();
             }
         }
-    }    
+
+        // Distribuição para apostas de games perdedor
+        $totalAmountGames = Bet::where('event_id', $event->id)->where('bet_type', 'games')->sum('bet_amount');
+        $winningBetsGames = Bet::where('event_id', $event->id)->where('bet_type', 'games')->where(function ($query) use ($gamesLoser) {
+            if ($gamesLoser <= 4) {
+                $query->where('bet_value', '0-4');
+            } elseif ($gamesLoser <= 8) {
+                $query->where('bet_value', '5-8');
+            } elseif ($gamesLoser <= 12) {
+                $query->where('bet_value', '9-12');
+            }
+        })->get();
+        $losingBetsGames = Bet::where('event_id', $event->id)->where('bet_type', 'games')->where(function ($query) use ($gamesLoser) {
+            if ($gamesLoser <= 4) {
+                $query->where('bet_value', '!=', '0-4');
+            } elseif ($gamesLoser <= 8) {
+                $query->where('bet_value', '!=', '5-8');
+            } elseif ($gamesLoser <= 12) {
+                $query->where('bet_value', '!=', '9-12');
+            }
+        })->sum('bet_amount');
+
+        if ($winningBetsGames->count() > 0) {
+            $winningAmountPerUserGames = $losingBetsGames / $winningBetsGames->count();
+
+            foreach ($winningBetsGames as $bet) {
+                $user = $bet->user;
+                $user->credits += $bet->bet_amount + $winningAmountPerUserGames;
+                $user->save();
+            }
+        }
+    }   
 
     public function resolveGet(Event $event): View
     {
