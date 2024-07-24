@@ -13,8 +13,10 @@ class BetController extends Controller
 
     public function index()
     {
-        $events = Event::where('status', 'ativo')->get();
-    
+        $events = Event::where('status', 'ativo')
+            ->orderBy('time_limit') // Ordena pelo tempo limite
+            ->get();
+        
         foreach ($events as $event) {
             // Apostas para vencedor
             $totalBets = Bet::where('event_id', $event->id)->where('bet_type', 'winner')->count();
@@ -43,7 +45,6 @@ class BetController extends Controller
     
         return view('bets.showbets', compact('events'));
     }
-    
 
     public function inspect($id)
     {
