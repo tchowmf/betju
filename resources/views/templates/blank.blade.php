@@ -30,8 +30,8 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <img src="{{ asset('img/alias.png') }}" alt="Logo" style="width: 50px; height: 65px;">
+                <div class="sidebar-brand-icon">
+                    <img src="{{ asset('img/BETJUUU-OFICIAL.png') }}" alt="Logo" style="width: 50px; height: 65px;">
                 </div>
                 <div class="sidebar-brand-text mx-3">Bet Juuu</div>
             </a>
