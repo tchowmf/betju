@@ -85,13 +85,13 @@
                                 <form action="{{ route('profile.updateBet', $bet->id) }}" method="POST" data-player1="{{ $bet->event->player1 }}" data-player2="{{ $bet->event->player2 }}">
                                     @csrf
                                     @method('PUT')
-                                    <select name="bet_type" id="bet_type_{{ $bet->id }}" class="form-control" onchange="updateBetValueOptions({{ $bet->id }})">
+                                    <select name="bet_type" id="bet_type_{{ $bet->id }}" class="form-control-plaintext" onchange="updateBetValueOptions({{ $bet->id }})">
                                         <option value="winner" {{ $bet->bet_type == 'winner' ? 'selected' : '' }}>Winner</option>
                                         <option value="games" {{ $bet->bet_type == 'games' ? 'selected' : '' }}>Games</option>
                                     </select>
                             </td>
                             <td>
-                                <select name="bet_value" id="bet_value_{{ $bet->id }}" class="form-control">
+                                <select name="bet_value" id="bet_value_{{ $bet->id }}" class="form-control-plaintext">
                                     @if ($bet->bet_type == 'winner')
                                         <option value="{{ $bet->event->player1 }}" {{ $bet->bet_value == $bet->event->player1 ? 'selected' : '' }}>{{ $bet->event->player1 }}</option>
                                         <option value="{{ $bet->event->player2 }}" {{ $bet->bet_value == $bet->event->player2 ? 'selected' : '' }}>{{ $bet->event->player2 }}</option>
