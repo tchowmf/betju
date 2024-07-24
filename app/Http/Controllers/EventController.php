@@ -13,19 +13,17 @@ class EventController extends Controller
 
     public function index()
     {
-        $userrole=Auth()->user()->role->name;
+        $userrole = Auth()->user()->role->name;
         
-        if($userrole == 'admin')
-        {
-            $events = Event::all();
+        if ($userrole == 'admin') {
+            $events = Event::orderByRaw("FIELD(status, 'ativo', 'inativo', 'resolvido', 'cancelado')")->get();
             return view('events.events', compact('events'));
-        }
-        else
-        {
+        } else {
             $events = Event::all();
             return view('bets.showbets', compact('events'))->with('error', 'Não tem autorização');
         }
     }
+
 
     public function create(): View
     {
