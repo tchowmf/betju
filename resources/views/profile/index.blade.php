@@ -21,6 +21,10 @@
                         <a class="nav-link" href="{{ route('profile.index') }}" style="color: black; text-decoration: none;">
                             Conta
                         </a>
+                        
+                        <a class="nav-link" href="{{ route('profile.userBets')}}" style="color: black; text-decoration: none;">
+                            Apostas
+                        </a>
 
                         <a class="nav-link" href="{{ route('profile.edit') }}" style="color: black; text-decoration: none;">
                             Alterar senha

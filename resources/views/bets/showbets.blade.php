@@ -60,7 +60,7 @@
                     @foreach (['0-4', '5-8', '9-12'] as $interval)
                     <div class="row no-gutters align-items-center mb-3">
                         <div class="col-auto" style="width: 100px;">
-                            <div class="mb-0 mr-3 font-weight-bold text-gray-800">Games {{ $interval }}</div>
+                            <div class="mb-0 font-weight-bold text-gray-800">Games {{ $interval }}</div>
                         </div>
                         <div class="col">
                             <div>{{ $event->gameBets[$interval] ?? 0 }}</div>
