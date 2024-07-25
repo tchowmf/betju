@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
+    Route::get('/apostas/campeao', [BetController::class, 'campeao'])->name('bet.campeao');
+    Route::post('/apostas/campeao', [BetController::class, 'storeCAMPEAO'])->name('bet.storeCAMPEAO');
     Route::get('/apostas', [BetController::class, 'index'])->name('bet.index');
     Route::get('/apostas/{id}', [BetController::class, 'inspect'])->name('bet.inspect');
     Route::post('/apostas', [BetController::class, 'store'])->name('bet.store');
