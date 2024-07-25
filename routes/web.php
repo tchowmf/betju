@@ -16,8 +16,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/perfil', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/perfil/apostas', [ProfileController::class, 'userBets'])->name('profile.userBets');
-    Route::put('/perfil/bets/{id}', [ProfileController::class, 'updateBet'])->name('profile.updateBet');
-    Route::delete('/perfil/bets/{id}', [ProfileController::class, 'cancelBet'])->name('profile.cancelBet');
+    Route::put('/perfil/apostas/{id}', [ProfileController::class, 'updateBet'])->name('profile.updateBet');
+    Route::delete('/perfil/apostas/{id}', [ProfileController::class, 'cancelBet'])->name('profile.cancelBet');
     Route::get('/perfil/alterar-senha', [ProfileController::class, 'edit'])->name('profile.edit'); 
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
