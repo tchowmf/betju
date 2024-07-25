@@ -33,25 +33,24 @@
                         <div class="form-group">
                             <label for="bet_value">Opção de Aposta:</label>
                             <select name="bet_value" id="bet_value" class="form-control">
-                                <option value="Rivael e Maga">Rivael e Maga</option>
-                                <option value="José Chaves e Gisele">José Chaves e Gisele</option>
-                                <option value="Ande e Eloisa">Ande e Eloisa</option>
+                                <option value="Rivael e Maga">Rivael e Maga</option> ok
+                                <option value="José Chaves e Gisele">José Chaves e Gisele</option> ok
+                                <option value="Ande e Eloisa">Ande e Eloisa</option> ok
                                 <option value="Caio Leite e Camila">Caio Leite e Camila</option>
-                                <option value="Palharin e Carol Machado">Palharin e Carol Machado</option>
+                                <option value="Palharin e Carol Machado">Palharini e Carol Machado</option>
                                 <option value="Lucas Lopes e Iara">Lucas Lopes e Iara</option>
                                 <option value="Juliano P e Andressa">Juliano P e Andressa</option>
                                 <option value="Sergio S e Dani Borsato">Sergio S e Dani Borsato</option>
                                 <option value="Caio Silva e Isabela">Caio Silva e Isabela</option>
-                                <option value="Vitor Garnica e Rina">Vitor Garnica e Rina</option>
+                                <option value="Vitor Garnica e Rina">Vitor Garnica e Luma</option>
                                 <option value="Alex Ruiz e Denise">Alex Ruiz e Denise</option>
                                 <option value="Schmidt e Paula">Schmidt e Paula</option>
                                 <option value="Adalberto e Lucilene">Adalberto e Lucilene</option>
-                                <option value="Pedro e Pati">Pedro e Pati</option>
+                                <option value="Pedro e Pati">Pedro e Paty</option>
                                 <option value="Jacob e Maria Fernanda">Jacob e Maria Fernanda</option>
-                                <option value="Ricardo Colaciti e Luma">Ricardo Colaciti e Luma</option>
-                                <option value="Gabriel Batista e Luiza">Gabriel Batista e Luiza</option>
+                                <option value="Gabriel Batista e Luiza">Gabriel Batista e Luisa</option>
                                 <option value="Vitor e Liris">Vitor e Liris</option>
-                                <option value="Rob e Nadia">Rob e Nadia</option>
+                                <option value="Rob e Nadia">Robi e Nadia</option>
                             </select>
                         </div>
                     
