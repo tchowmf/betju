@@ -74,6 +74,7 @@
                     </div>
 
                     <div class="text-center my-3">Games</div>
+                    <!--
                     @foreach (['0-4', '5-8', '9-12'] as $interval)
                     <div class="row no-gutters align-items-center mb-3">
                         <div class="col-auto" style="width: 100px;">
@@ -88,7 +89,7 @@
                         </div>
                     </div>
                     @endforeach
-
+                    -->
                     <p>Tempo restante: <span id="countdown{{ $event->id }}"></span></p>
                     <br>
                     <a href="{{ route('bet.inspect', $event->id) }}" class="btn btn-info btn-sm">
