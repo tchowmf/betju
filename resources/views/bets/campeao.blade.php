@@ -33,10 +33,10 @@
                         <div class="form-group">
                             <label for="bet_value">Opção de Aposta:</label>
                             <select name="bet_value" id="bet_value" class="form-control">
-                                <option value="Rivael e Maga">Rivael e Maga</option> ok
-                                <option value="José Chaves e Gisele">José Chaves e Gisele</option> ok
-                                <option value="Ande e Eloisa">Ande e Eloisa</option> ok
-                                <option value="Caio Leite e Camila">Caio Leite e Camila</option>
+                                <option value="Rivael e Maga">Rivael e Maga</option>
+                                <option value="José Chaves e Gisele">José Chaves e Gisele</option>
+                                <option value="Ande e Eloisa">Ande e Eloisa</option>
+                                <option value="Caio Leite e Camila">Claudio Lopes e Camila</option>
                                 <option value="Palharin e Carol Machado">Palharini e Carol Machado</option>
                                 <option value="Lucas Lopes e Iara">Lucas Lopes e Iara</option>
                                 <option value="Juliano P e Andressa">Juliano P e Andressa</option>
