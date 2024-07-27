@@ -36,7 +36,7 @@
                                 <option value="Rivael e Maga">Rivael e Maga</option>
                                 <option value="José Chaves e Gisele">José Chaves e Gisele</option>
                                 <option value="Ande e Eloisa">Ande e Eloisa</option>
-                                <option value="Caio Leite e Camila">Claudio Lopes e Camila</option>
+                                <option value="Claudio Lopes e Camila">Claudio Lopes e Camila</option>
                                 <option value="Palharin e Carol Machado">Palharini e Carol Machado</option>
                                 <option value="Lucas Lopes e Iara">Lucas Lopes e Iara</option>
                                 <option value="Juliano P e Andressa">Juliano P e Andressa</option>
@@ -45,7 +45,7 @@
                                 <option value="Vitor Garnica e Rina">Vitor Garnica e Luma</option>
                                 <option value="Alex Ruiz e Denise">Alex Ruiz e Denise</option>
                                 <option value="Schmidt e Paula">Schmidt e Paula</option>
-                                <option value="Adalberto e Lucilene">Adalberto e Lucilene</option>
+                                <option value="Ricardo Colaciti e Lucilene">Ricardo Colaciti e Lucilene</option>
                                 <option value="Pedro e Pati">Pedro e Paty</option>
                                 <option value="Jacob e Maria Fernanda">Jacob e Maria Fernanda</option>
                                 <option value="Gabriel Batista e Luiza">Gabriel Batista e Luisa</option>
