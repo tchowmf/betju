@@ -16,7 +16,7 @@
 @endif
 
 <div id="content" class="d-flex flex-wrap">
-    <!-- Adicionar link para a página de apostas do campeonato -->
+    <!-- APOSTAS PARA CAMPEAO
     <div class="col-lg-3">
         <div class="card shadow mb-4">
             <a href="#collapseCardCampeao" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardCampeao">
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-
+-->
     @foreach ($events as $event)
     @if($event->status == 'ativo')
     <div class="col-lg-3">
