@@ -29,7 +29,7 @@
                             <label for="bet_type">Tipo de Aposta:</label>
                             <select name="bet_type" id="bet_type" class="form-control">
                                 <option value="winner">Vencedor</option>
-                                <!--<option value="games">Número de Games</option>-->
+                                <option value="games">Número de Games</option>
                             </select>
                         </div>
                     
