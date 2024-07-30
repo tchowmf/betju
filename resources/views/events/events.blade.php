@@ -63,7 +63,8 @@
 
 <script>
     new DataTable('#dataTable', {
-        pageLength: 15
+        "pageLength": 15,
+        "order": []
     });('#dataTable');
 </script>
 
