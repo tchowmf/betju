@@ -24,7 +24,6 @@ class EventController extends Controller
         }
     }
 
-
     public function create(): View
     {
         $userrole=Auth()->user()->role->name;
@@ -93,7 +92,7 @@ class EventController extends Controller
         return redirect()->route('dashboard')->with('success', 'Evento excluído com sucesso!');
     }
 
-    public function distributeWinnings(Event $event)
+    private function distributeWinnings(Event $event)
     {
         if ($event->status !== 'resolvido' || !$event->winner) {
             return;
@@ -195,7 +194,7 @@ class EventController extends Controller
         return redirect()->route('dashboard')->with('success', 'Evento resolvido e pagamentos distribuídos.');
     }
 
-    public function refundBets(Event $event)
+    private function refundBets(Event $event)
     {
         // Obter todas as apostas relacionadas ao evento
         $bets = Bet::where('event_id', $event->id)->get();
@@ -207,7 +206,7 @@ class EventController extends Controller
         }
     }
 
-    public function cancelEvent(Request $request, $id)
+    public function cancelEvent($id)
     {
         $event = Event::find($id);
         $event->status = 'cancelado'; // Atualizar o status para "cancelado"
