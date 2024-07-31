@@ -24,10 +24,10 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'user' => fake()->name(),
-            'password' => static::$password ??= Hash::make('password'),
-            'credits' => fake()->Integer(10),
-            'remember_token' => Str::random(10),
+            'username' => $this->faker->unique()->userName,
+            'password' => Hash::make('password'), // Senha padrão
+            'credits' => 100, // Créditos padrão
+            'role_id' => 2, // Assumindo que 2 é o ID padrão para o role do usuário
         ];
     }
 

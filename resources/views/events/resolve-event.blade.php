@@ -32,6 +32,7 @@
                         <div class="form-group">
                             <label for="loser_games">Games Perdedor</label>
                             <select name="loser_games" id="loser_games" class="form-control">
+                                <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
