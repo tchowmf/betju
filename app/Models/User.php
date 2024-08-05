@@ -89,7 +89,13 @@ class User extends Authenticatable
 
     public function netEarnings()
     {
-        $totalBetAmount = $this->bets->sum('bet_amount');
+        // Filtra as apostas com status "resolvido"
+        $resolvedBets = $this->bets->filter(function($bet) {
+            return $bet->event->status == 'resolvido';
+        });
+
+        // Soma o valor das apostas com status "resolvido"
+        $totalBetAmount = $resolvedBets->sum('bet_amount');
         $totalWinnings = 0;
 
         foreach ($this->bets as $bet) {
