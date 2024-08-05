@@ -189,7 +189,7 @@
                                     </div>
                                 </a>
                                 @endforeach
-                                <a class="dropdown-item text-center small text-gray-500" href="{{ route('notifications.clearAll') }}">Show All Alerts</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="{{ route('notifications.clearAll') }}">Limpar Todas Notificações</a>
                             </div>
                         </li>
 
