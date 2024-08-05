@@ -1,5 +1,5 @@
 @extends('templates.blank')
-@section('title', "Bet Juuu - Editar Aposta")
+@section('title', "Bet Juuu - Enviar Resultado")
 
 @section('contents')
 
@@ -16,7 +16,7 @@
         <div class="card-body">
             <div class="row no-gutters align-items-center">
                 <div class="col mr-2">
-                    <h1>Editar Aposta</h1>
+                    <h1>Enviar Resultado</h1>
 
                     <form action="{{ route('events.resolve', $event->id) }}" method="POST">
                         @csrf

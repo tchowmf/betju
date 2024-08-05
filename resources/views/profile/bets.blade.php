@@ -103,16 +103,16 @@
                                 </select>
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-success">
+                                <button type="submit" class="btn btn-success btn-circle">
                                     <i class="fa fa-check"></i>
                                 </button>
+                                </form>
                                 <form action="{{ route('profile.cancelBet', $bet->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">
+                                    <button type="submit" class="btn btn-danger btn-circle">
                                         <i class="fa fa-trash"></i>
                                     </button>
-                                </form>
                                 </form>
                                 @else
                                     {{ $bet->bet_value }}

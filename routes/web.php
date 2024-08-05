@@ -1,16 +1,20 @@
 <?php
 
+use App\Http\Controllers\AccManager;
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
+use App\Models\Transaction;
 
-Route::get('/', function () {
-    return view('auth.login');
+Route::get('/123', function () {
+    return view('transaction.transfer-form');
 });
 
 Route::middleware('auth')->group(function () {
@@ -21,6 +25,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/perfil/alterar-senha', [ProfileController::class, 'edit'])->name('profile.edit'); 
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('auth')->group(function() {
+    Route::get('/transacao/{id}', [TransactionController::class, 'index'])->name('transaction.index');
+    Route::post('/transacao/{id}', [TransactionController::class, 'transaction'])->name('transaction');
 });
 
 Route::group(['middleware' => ['auth', 'verified']], function() {
@@ -49,6 +58,10 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::put('/events/resolve/{event}', [EventController::class, 'resolve'])->name('events.resolve');
     Route::put('/events/{id}/cancel', [EventController::class, 'cancelEvent'])->name('events.cancel');
     Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+
+    Route::get('/events/users/{user}/edit', [ManagerController::class, 'edit'])->name('manager.edit');
+    Route::put('/events/users/{user}', [ManagerController::class, 'update'])->name('manager.update');
+    Route::delete('/events/users/{user}', [ManagerController::class, 'destroy'])->name('manager.destroy');
 });
 
 require __DIR__.'/auth.php';

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bet;
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -11,13 +12,20 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
 
-    public function index()
+    public function index(): View
     {
         $userrole = Auth()->user()->role->name;
         
         if ($userrole == 'admin') {
-            $events = Event::orderByRaw("FIELD(status, 'ativo', 'inativo', 'resolvido', 'cancelado')")->get();
-            return view('events.events', compact('events'));
+            $view = request()->get('view', 'events');
+            
+            if ($view == 'users') {
+                $users = User::all();
+                return view('events.events', compact('users'));
+            } else {
+                $events = Event::orderByRaw("FIELD(status, 'ativo', 'inativo', 'resolvido', 'cancelado')")->get();
+                return view('events.events', compact('events'));
+            }
         } else {
             $events = Event::all();
             return view('bets.showbets', compact('events'))->with('error', 'Não tem autorização');

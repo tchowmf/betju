@@ -73,7 +73,7 @@ class BetController extends Controller
             'bet_amount' => 'required|numeric|min:15|max:30',
         ]);
     
-        $event = Event::find($request->event_id);
+        $event = Event::findOrFail($request->event_id);
     
         if ($event->status !== 'inativo' || now() > $event->time_limit) {
             return redirect()->route('bet.index')->with('error', 'Não é possível realizar a aposta. Evento inativo ou fora do tempo permitido.');

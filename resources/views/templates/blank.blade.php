@@ -50,7 +50,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Criar Aposta</span></a>
+                    <span>Administração</span></a>
             </li>
             @endif
 
