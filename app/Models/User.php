@@ -63,6 +63,7 @@ class User extends Authenticatable
         return $this->hasMany(Event::class);
     }
 
+    //releation transaction model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);

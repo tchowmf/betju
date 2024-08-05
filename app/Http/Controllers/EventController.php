@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Bet;
 use App\Models\Event;
 use App\Models\User;
+use App\Notifications\BetResolved;
+use App\Notifications\EventCancelled;
+use App\Notifications\EventCreated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -57,13 +60,20 @@ class EventController extends Controller
             'time_limit' => 'required|date',
         ]);
 
-        Event::create([
+        $event = Event::create([
             'title' => $request->title,
             'player1' => $request->player1,
             'player2' => $request->player2,
             'status' => $request->status,
             'time_limit' => $request->time_limit,
         ]);
+
+        if ($event->status == 'ativo') {
+            $users = User::all();
+            foreach ($users as $user) {
+                $user->notify(new EventCreated($event));
+            }
+        }
 
         return redirect()->route('dashboard')->with('success', 'Evento criado com sucesso!');
     }
@@ -90,6 +100,13 @@ class EventController extends Controller
             'status' => $request->status,
             'time_limit' => $request->time_limit,
         ]);
+
+        if ($event->status == 'ativo') {
+            $users = User::all();
+            foreach ($users as $user) {
+                $user->notify(new EventCreated($event));
+            }
+        }
 
         return redirect()->route('dashboard')->with('success', 'Evento atualizado com sucesso!');
     }
@@ -198,6 +215,11 @@ class EventController extends Controller
         $event->save();
     
         $this->distributeWinnings($event);
+
+        $users = $event->bets->pluck('user');
+        foreach ($users as $user) {
+            $user->notify(new BetResolved($event));
+        }
     
         return redirect()->route('dashboard')->with('success', 'Evento resolvido e pagamentos distribuídos.');
     }
@@ -216,11 +238,16 @@ class EventController extends Controller
 
     public function cancelEvent($id)
     {
-        $event = Event::find($id);
+        $event = Event::findOrFail($id);
         $event->status = 'cancelado'; // Atualizar o status para "cancelado"
         $event->save();
 
         $this->refundBets($event);
+
+        $users = $event->bets->pluck('user');
+        foreach ($users as $user) {
+            $user->notify(new EventCancelled($event));
+        }
 
         return redirect()->route('dashboard')->with('success', 'Evento cancelado e apostas estornadas.');
     }

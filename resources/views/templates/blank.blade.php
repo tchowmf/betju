@@ -143,7 +143,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">2</span>
+                                <span class="badge badge-danger badge-counter">{{ auth()->user()->unreadNotifications->count() }}</span>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -151,29 +151,45 @@
                                 <h6 class="dropdown-header">
                                     Notificações
                                 </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                @foreach(auth()->user()->notifications as $notification)
+                                <a class="dropdown-item d-flex align-items-center" href="{{ route('notifications.markAsRead', $notification->id) }}">
                                     <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
+                                        @php
+                                            $icon = 'fa-file-alt';
+                                            $bgColor = 'bg-primary';
+
+                                            if ($notification->data['type'] == 'deposit') {
+                                                $icon = 'fa-donate';
+                                                $bgColor = 'bg-success';
+                                            }
+                                            if ($notification->data['type'] == 'withdraw') {
+                                                $icon = 'fa-donate';
+                                                $bgColor = 'bg-danger';
+                                            } elseif ($notification->data['type'] == 'bet-live') {
+                                                $icon = 'fa-file-alt';
+                                                $bgColor = 'bg-info';
+                                            }
+                                            elseif ($notification->data['type'] == 'bet-end') {
+                                                $icon = 'fa-trophy';
+                                                $bgColor = 'bg-info';
+                                            }elseif ($notification->data['type'] == 'bet-cancel') {
+                                                $icon = 'fa-times';
+                                                $bgColor = 'bg-danger';
+                                            }
+                                        @endphp
+                                        <div class="icon-circle {{ $bgColor }}">
+                                            <i class="fas {{ $icon }} text-white"></i>
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">27/06/2024</div>
-                                        <span class="font-weight-bold">Resultado Caio x Juliano esta disponivel!</span>
+                                        <div class="small text-gray-500">{{ $notification->created_at->format('d/m/Y') }}</div>
+                                        <span class="{{ $notification->read_at ? 'font-weight-normal' : 'font-weight-bold' }}">
+                                            {{ $notification->data['message'] }}
+                                        </span>
                                     </div>
                                 </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">22/06/2024</div>
-                                        R$30.00 foram depositados na sua conta!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                                @endforeach
+                                <a class="dropdown-item text-center small text-gray-500" href="{{ route('notifications.clearAll') }}">Show All Alerts</a>
                             </div>
                         </li>
 

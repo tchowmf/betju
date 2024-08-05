@@ -1,20 +1,20 @@
 <?php
 
-use App\Http\Controllers\AccManager;
 use App\Http\Controllers\BetController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 use App\Models\Transaction;
 
-Route::get('/123', function () {
-    return view('transaction.transfer-form');
+Route::get('/', function () {
+    return view('auth.login');
 });
 
 Route::middleware('auth')->group(function () {
@@ -26,6 +26,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+    Route::get('/notifications/clear-all', [NotificationController::class, 'clearAll'])->name('notifications.clearAll');
+});
+
 
 Route::middleware('auth')->group(function() {
     Route::get('/transacao/{id}', [TransactionController::class, 'index'])->name('transaction.index');
