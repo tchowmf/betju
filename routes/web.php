@@ -32,7 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/notifications/clear-all', [NotificationController::class, 'clearAll'])->name('notifications.clearAll');
 });
 
-
 Route::middleware('auth')->group(function() {
     Route::get('/transacao/{id}', [TransactionController::class, 'index'])->name('transaction.index');
     Route::post('/transacao/{id}', [TransactionController::class, 'transaction'])->name('transaction');

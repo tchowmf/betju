@@ -161,18 +161,16 @@
                                             if ($notification->data['type'] == 'deposit') {
                                                 $icon = 'fa-donate';
                                                 $bgColor = 'bg-success';
-                                            }
-                                            if ($notification->data['type'] == 'withdraw') {
+                                            } elseif ($notification->data['type'] == 'withdraw') {
                                                 $icon = 'fa-donate';
                                                 $bgColor = 'bg-danger';
                                             } elseif ($notification->data['type'] == 'bet-live') {
                                                 $icon = 'fa-file-alt';
                                                 $bgColor = 'bg-info';
-                                            }
-                                            elseif ($notification->data['type'] == 'bet-end') {
+                                            } elseif ($notification->data['type'] == 'bet-end') {
                                                 $icon = 'fa-trophy';
                                                 $bgColor = 'bg-info';
-                                            }elseif ($notification->data['type'] == 'bet-cancel') {
+                                            } elseif ($notification->data['type'] == 'bet-cancel') {
                                                 $icon = 'fa-times';
                                                 $bgColor = 'bg-danger';
                                             }

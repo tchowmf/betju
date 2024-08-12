@@ -26,31 +26,28 @@
                         <input type="hidden" name="event_id" value="{{ $event->id }}">
 
                         <div class="form-group">
-                            <label for="bet_type">Tipo da Aposta:</label>
-                            <input type="text" name="bet_type" id="bet_type" class="form-control" value="winner" readonly="">
+                            <input type="hidden" name="bet_type" id="bet_type" class="form-control" value="winner" readonly="">
                         </div>
                     
                         <div class="form-group">
                             <label for="bet_value">Opção de Aposta:</label>
                             <select name="bet_value" id="bet_value" class="form-control">
-                                <option value="Rivael e Maga">Rivael e Maga</option>
-                                <option value="José Chaves e Gisele">José Chaves e Gisele</option>
-                                <option value="Ande e Eloisa">Ande e Eloisa</option>
-                                <option value="Claudio Lopes e Camila">Claudio Lopes e Camila</option>
-                                <option value="Palharin e Carol Machado">Palharini e Carol Machado</option>
-                                <option value="Lucas Lopes e Iara">Lucas Lopes e Iara</option>
-                                <option value="Juliano P e Andressa">Juliano P e Andressa</option>
-                                <option value="Sergio S e Dani Borsato">Sergio S e Dani Borsato</option>
-                                <option value="Caio Silva e Isabela">Caio Silva e Isabela</option>
-                                <option value="Vitor Garnica e Rina">Vitor Garnica e Luma</option>
-                                <option value="Alex Ruiz e Denise">Alex Ruiz e Denise</option>
-                                <option value="Schmidt e Paula">Schmidt e Paula</option>
-                                <option value="Ricardo Colaciti e Lucilene">Ricardo Colaciti e Lucilene</option>
-                                <option value="Pedro e Pati">Pedro e Paty</option>
-                                <option value="Jacob e Maria Fernanda">Jacob e Maria Fernanda</option>
-                                <option value="Gabriel Batista e Luiza">Gabriel Batista e Luisa</option>
-                                <option value="Vitor e Liris">Vitor e Liris</option>
-                                <option value="Rob e Nadia">Robi e Nadia</option>
+                                <option value="Rivael / Leo">Rivael / Leo</option>
+                                <option value="Palharin / Carol Salgado">Palharin / Carol Salgado</option>
+                                <option value="Ricardo / Artur">Ricardo / Artur</option>
+                                <option value="Claudio / Juliano">Claudio / Juliano</option>
+                                <option value="Luciano / Cristiano">Luciano / Cristiano</option>
+                                <option value="Diego Pavanato / Caju">Diego Pavanato / Caju</option>
+                                <option value="Schmdit / Vitor M F">Schmdit / Vitor M F</option>
+                                <option value="Vitor G / Guaxi">Vitor G / Guaxi</option>
+                                <option value="Jacob / Alex Ruiz">Jacob / Alex Ruiz</option>
+                                <option value="Marcel / Pedro Beltramini">Marcel / Pedro Beltramini</option>
+                                <option value="Sergio Sorze / Dani Borsato">Sergio Sorze / Dani Borsato</option>
+                                <option value="Matheus / Gui Ortolani">Matheus / Gui Ortolani</option>
+                                <option value="Val / Plets">Val / Plets</option>
+                                <option value="Vpau / Enaldo">Vpau / Enaldo</option>
+                                <option value="Ande / Guilherme">Ande / Guilherme</option>
+                                <option value="Harisson / Marcondes">Harisson / Marcondes</option>
                             </select>
                         </div>
                     
