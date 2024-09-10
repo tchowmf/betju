@@ -16,22 +16,23 @@
 @endif
 
 <div id="content" class="d-flex flex-wrap">
-    <div class="col-lg-3">
-        <div class="card shadow mb-4">
-            <a href="#collapseCardCampeao" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardCampeao">
-                <h6 class="m-0 font-weight-bold text-primary">Campeonato de Duplas</h6>
-            </a>
-            <div class="collapse show" id="collapseCardCampeao">
-                <div class="card-body">
-                    <p>Faça sua aposta para o CAMPEÃO de duplas!</p>
-                    <a href="{{ route('bet.campeao') }}" class="btn btn-info btn-sm">
-                        <span class="text">Ver Aposta</span>
-                    </a>
+    <!-- Apostas de campeonato
+        <div class="col-lg-3">
+            <div class="card shadow mb-4">
+                <a href="#collapseCardCampeao" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardCampeao">
+                    <h6 class="m-0 font-weight-bold text-primary">Campeonato de Duplas</h6>
+                </a>
+                <div class="collapse show" id="collapseCardCampeao">
+                    <div class="card-body">
+                        <p>Faça sua aposta para o CAMPEÃO de duplas!</p>
+                        <a href="{{ route('bet.campeao') }}" class="btn btn-info btn-sm">
+                            <span class="text">Ver Aposta</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
+    -->
     @foreach ($events as $event)
     @if($event->status == 'ativo')
     <div class="col-lg-3">
