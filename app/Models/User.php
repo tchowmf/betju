@@ -89,35 +89,21 @@ class User extends Authenticatable
 
     public function netEarnings()
     {
-        // Filtra as apostas com status "resolvido"
-        $resolvedBets = $this->bets->filter(function($bet) {
-            return $bet->event->status == 'resolvido';
-        });
-
-        // Soma o valor das apostas com status "resolvido"
-        $totalBetAmount = $resolvedBets->sum('bet_amount');
-        $totalWinnings = 0;
-
-        foreach ($this->bets as $bet) {
-            if ($bet->event->status == 'resolvido') {
-                if ($bet->bet_type == 'winner' && $bet->bet_value == $bet->event->winner) {
-                    $losingBetsAmount = Bet::where('event_id', $bet->event_id)->where('bet_value', '!=', $bet->event->winner)->sum('bet_amount');
-                    $winningBetsCount = Bet::where('event_id', $bet->event_id)->where('bet_value', $bet->event->winner)->count();
-                    $totalWinnings += $bet->bet_amount + ($losingBetsAmount / $winningBetsCount);
-                }
-                if ($bet->bet_type == 'games') {
-                    $loserGames = $bet->event->loser_games;
-                    $interval = $this->getGamesInterval($loserGames);
-                    if ($bet->bet_value == $interval) {
-                        $losingBetsAmount = Bet::where('event_id', $bet->event_id)->where('bet_value', '!=', $interval)->where('bet_type', 'games')->sum('bet_amount');
-                        $winningBetsCount = Bet::where('event_id', $bet->event_id)->where('bet_value', $interval)->where('bet_type', 'games')->count();
-                        $totalWinnings += $bet->bet_amount + ($losingBetsAmount / $winningBetsCount);
-                    }
-                }
-            }
-        }
-
-        return $totalWinnings - $totalBetAmount;
+        // Obtém o total de depósitos (soma de todas as transações de depósito)
+        $totalDeposits = $this->transactions()
+                              ->where('transaction_type', 'deposit')
+                              ->sum('transaction_value');
+    
+        // Obtém o total de retiradas (soma de todas as transações de retirada)
+        $totalWithdrawals = $this->transactions()
+                                 ->where('transaction_type', 'withdraw')
+                                 ->sum('transaction_value');
+    
+        // Saldo atual do usuário
+        $currentBalance = $this->credits;
+    
+        // Calcula o lucro líquido: saldo atual - (total depositado - total retirado)
+        return $currentBalance + ($totalWithdrawals - $totalDeposits);
     }
 
     private function getGamesInterval($loserGames)
